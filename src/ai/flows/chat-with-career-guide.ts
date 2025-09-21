@@ -9,7 +9,6 @@
 
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
-import { Message, Role } from 'genkit/experimental/ai';
 
 const CareerDomainSchema = z.enum([
   'Technology',
@@ -30,7 +29,7 @@ export type ChatWithCareerGuideHistory = z.infer<
 >;
 
 export const ChatWithCareerGuideOutputSchema = z.object({
-  response: z.string().describe('The AI\'s response to the user.'),
+  response: z.string().describe("The AI's response to the user."),
   recommendedDomain: CareerDomainSchema.describe(
     "The career domain recommended for the user. Set to 'undetermined' if the conversation is not yet conclusive."
   ),
@@ -71,11 +70,12 @@ const chatWithCareerGuideFlow = ai.defineFlow(
     outputSchema: ChatWithCareerGuideOutputSchema,
   },
   async (history) => {
-    const chatHistory = history.map(
-      (msg) => new Message(msg.role as Role, [{ text: msg.content }])
-    );
-
-    const { output } = await prompt(history, { history: chatHistory });
+    const { output } = await prompt(history, {
+      history: history.map((message) => ({
+        role: message.role,
+        content: [{ text: message.content }],
+      })),
+    });
     return output!;
   }
 );
