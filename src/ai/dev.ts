@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/chat-with-career-guide';
+import '@/ai/flows';
