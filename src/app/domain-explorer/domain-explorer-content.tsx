@@ -47,7 +47,7 @@ const domains: Domain[] = [
     name: 'Skilled Trades & Artisanship',
     description: 'Build, repair, and create with your hands.',
     icon: Hammer,
-    path: '/skilled-trades-quiz',
+    path: '/skilled-trades-assessment/1',
   },
   {
     id: 'public',
