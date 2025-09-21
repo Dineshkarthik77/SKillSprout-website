@@ -89,7 +89,7 @@ const domains: Domain[] = [
     name: 'Science & Research',
     description: 'Discover, experiment, and expand knowledge.',
     icon: FlaskConical,
-    path: '/career-quiz',
+    path: '/science-research-assessment/1',
   },
   {
     id: 'legal',
