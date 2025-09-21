@@ -1,4 +1,4 @@
 import { config } from 'dotenv';
 config();
 
-import '@/ai/flows/personalized-career-recommendations.ts';
+import '@/ai/flows/chat-with-career-guide';
