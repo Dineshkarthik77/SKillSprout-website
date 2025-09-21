@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { DraggableCard } from '../draggable-card';
 import { CardHeader, CardTitle, CardContent } from '@/components/ui/card';
@@ -9,7 +9,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { useThemeContext } from '@/context/theme-context';
-import { useQuizContext } from '@/context/quiz-context';
 
 const ModelViewer = dynamic(() => import('./model-viewer-wrapper').then(mod => mod.ModelViewerWrapper), {
   ssr: false,
@@ -30,17 +29,16 @@ const themeModels: Record<string, string[]> = {
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
     'https://modelviewer.dev/shared-assets/models/RocketShip.glb', 
-    'https://modelviewer.dev/shared-assets/models/Sputnik.glb'
+    'https://modelviewer.dev/shared-assets/models/Server.glb'
   ],
 };
 
 export function ProgressVisualizer({ id }: { id: string }) {
   const { theme, setTheme } = useThemeContext();
-  // In a real app, this would be part of the QuizContext state
-  const level = 2; 
+  const [level, setLevel] = React.useState(2);
   const totalLevels = 3;
   
-  const [currentStep, setCurrentStep] = useState(level - 1);
+  const [currentStep, setCurrentStep] = React.useState(level - 1);
   const progress = ((currentStep + 1) / totalLevels) * 100;
   
   const models = themeModels[theme] || themeModels['default'];
