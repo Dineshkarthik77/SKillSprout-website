@@ -84,11 +84,15 @@ export type GenerateQuizOutput = z.infer<typeof GenerateQuizOutputSchema>;
 
 const generateQuizPrompt = ai.definePrompt({
   name: 'generateQuizPrompt',
-  input: { schema: GenerateQuizInputSchema },
+  input: { schema: z.object({
+    domain: z.string(),
+    level: z.number(),
+    isUniversal: z.boolean(),
+  }) },
   output: { schema: GenerateQuizOutputSchema },
   prompt: `You are an expert curriculum developer. Your task is to generate a set of 5 multiple-choice quiz questions.
 
-{{#if (eq domain "Universal Aptitude")}}
+{{#if isUniversal}}
 You are creating a Universal Aptitude test. The questions should be domain-agnostic and focus on logic, creativity, and problem-solving.
 
 Level: {{{level}}}
@@ -129,7 +133,10 @@ export const generateQuizFlow = ai.defineFlow(
     outputSchema: GenerateQuizOutputSchema,
   },
   async (input) => {
-    const { output } = await generateQuizPrompt(input);
+    const { output } = await generateQuizPrompt({
+      ...input,
+      isUniversal: input.domain === 'Universal Aptitude',
+    });
     return output!;
   }
 );
