@@ -96,7 +96,7 @@ const domains: Domain[] = [
     name: 'Legal',
     description: 'Uphold justice and navigate the law.',
     icon: Scale,
-    path: '/career-quiz',
+    path: '/legal-assessment/1',
   },
   {
     id: 'other',
