@@ -54,7 +54,7 @@ const domains: Domain[] = [
     name: 'Public Service & Administration',
     description: 'Serve the community and manage public resources.',
     icon: Building2,
-    path: '/career-quiz',
+    path: '/public-service-assessment/1',
   },
   {
     id: 'edu',
