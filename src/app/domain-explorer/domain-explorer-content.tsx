@@ -40,7 +40,7 @@ const domains: Domain[] = [
     name: 'Technology',
     description: 'Innovate with code, data, and systems.',
     icon: Cpu,
-    path: '/tech-assessment/level-1',
+    path: '/tech-assessment/1',
   },
   {
     id: 'mech',
