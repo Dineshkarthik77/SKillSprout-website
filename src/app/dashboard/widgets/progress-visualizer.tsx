@@ -22,7 +22,7 @@ const themeModels: Record<string, string[]> = {
     'https://modelviewer.dev/shared-assets/models/Server.glb'
   ],
   'mech': [
-    'https://modelviewer.dev/shared-assets/models/Hammer.glb', 
+    'https://modelviewer.dev/shared-assets/models/shishkebab.glb', 
     'https://modelviewer.dev/shared-assets/models/Wrench.glb', 
     'https://modelviewer.dev/shared-assets/models/Engine.glb'
   ],
