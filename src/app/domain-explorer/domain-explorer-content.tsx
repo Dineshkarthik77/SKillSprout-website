@@ -75,7 +75,7 @@ const domains: Domain[] = [
     name: 'Creative & Marketing',
     description: 'Imagine, design, and promote compelling ideas.',
     icon: Brush,
-    path: '/career-quiz',
+    path: '/creative-marketing-assessment/1',
   },
   {
     id: 'health',
