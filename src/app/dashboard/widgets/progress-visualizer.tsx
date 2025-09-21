@@ -22,9 +22,9 @@ const themeModels: Record<string, string[]> = {
     'https://modelviewer.dev/shared-assets/models/Server.glb'
   ],
   'mech': [
-    'https://modelviewer.dev/shared-assets/models/Mixer.glb', 
-    'https://modelviewer.dev/shared-assets/models/Chair.glb', 
-    'https://modelviewer.dev/shared-assets/models/Canoe.glb'
+    'https://modelviewer.dev/shared-assets/models/Engraving.glb', 
+    'https://modelviewer.dev/shared-assets/models/Stethoscope.glb',
+    'https://modelviewer.dev/shared-assets/models/gears.glb'
   ],
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
