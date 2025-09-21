@@ -30,7 +30,7 @@ const themeModels: Record<string, string[]> = {
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
     'https://modelviewer.dev/shared-assets/models/RocketShip.glb', 
-    'https://modelviewer.dev/shared-assets/models/Planet.glb'
+    'https://modelviewer.dev/shared-assets/models/Sputnik.glb'
   ],
 };
 
