@@ -82,7 +82,7 @@ const domains: Domain[] = [
     name: 'Healthcare',
     description: 'Care for others and advance medical science.',
     icon: HeartPulse,
-    path: '/career-quiz',
+    path: '/healthcare-assessment/1',
   },
   {
     id: 'science',
