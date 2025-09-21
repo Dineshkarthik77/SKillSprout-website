@@ -61,7 +61,7 @@ const domains: Domain[] = [
     name: 'Education',
     description: 'Inspire and empower the next generation.',
     icon: BookOpen,
-    path: '/career-quiz',
+    path: '/education-assessment/1',
   },
   {
     id: 'biz',
