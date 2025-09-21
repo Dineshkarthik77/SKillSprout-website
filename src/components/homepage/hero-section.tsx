@@ -1,8 +1,11 @@
 "use client";
 
 import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { ArrowRight } from 'lucide-react';
 import { FloatingRockets } from "./floating-rockets";
 import { Skeleton } from '@/components/ui/skeleton';
+import { Button } from '@/components/ui/button';
 
 const ModelViewer = dynamic(
   () => import('./model-viewer').then(mod => mod.ModelViewer),
@@ -26,6 +29,14 @@ export function HeroSection() {
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
               SkillSprout uses AI to analyze your unique talents and guide you toward your ideal career path with personalized learning journeys.
             </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button asChild size="lg">
+                <Link href="/career-gateway">
+                  Get Started Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
+              </Button>
+            </div>
           </div>
           <div className="relative w-full h-full aspect-square max-w-md mx-auto md:max-w-none">
             <ModelViewer />
