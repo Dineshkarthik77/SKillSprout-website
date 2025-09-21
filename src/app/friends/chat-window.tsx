@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+'use client';
+
+import { useState, useRef, useEffect } from 'react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { Send, Paperclip, Camera, Smile } from 'lucide-react';
+import { Send, Camera } from 'lucide-react';
 import { CameraModal } from './camera-modal';
 import { cn } from '@/lib/utils';
 import type { Friend } from './progress-snaps-content';
@@ -24,9 +26,23 @@ export function ChatWindow({ friend }: { friend: Friend }) {
   ]);
   const [inputValue, setInputValue] = useState('');
   const [isCameraOpen, setIsCameraOpen] = useState(false);
+  const scrollAreaRef = useRef<HTMLDivElement>(null);
 
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      const viewport = scrollAreaRef.current?.querySelector('div[data-radix-scroll-area-viewport]');
+      if (viewport) {
+        viewport.scrollTop = viewport.scrollHeight;
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages, friend]);
+  
   const addMessage = (text: string, image?: string) => {
-    if (!text && !image) return;
+    if (!text.trim() && !image) return;
     const newMessage: Message = {
       id: messages.length + 1,
       text,
@@ -41,6 +57,11 @@ export function ChatWindow({ friend }: { friend: Friend }) {
   const handleSendSnap = (imageDataUri: string) => {
     addMessage("", imageDataUri);
   };
+  
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    addMessage(inputValue);
+  };
 
   return (
     <div className="flex flex-col h-full">
@@ -52,7 +73,7 @@ export function ChatWindow({ friend }: { friend: Friend }) {
         <h2 className="font-semibold">{friend.name}</h2>
       </div>
 
-      <ScrollArea className="flex-grow p-4">
+      <ScrollArea className="flex-grow p-4" ref={scrollAreaRef}>
         <div className="space-y-4">
           {messages.map((msg) => (
             <div
@@ -71,14 +92,15 @@ export function ChatWindow({ friend }: { friend: Friend }) {
               
               <div
                 className={cn(
-                  'p-3 rounded-lg max-w-xs',
+                  'p-2 rounded-lg max-w-xs',
+                  msg.image ? 'p-1' : 'p-3',
                   msg.sender === 'me'
                     ? 'bg-primary text-primary-foreground'
                     : 'bg-muted'
                 )}
               >
                 {msg.text && <p>{msg.text}</p>}
-                {msg.image && <img src={msg.image} alt="snap" className="rounded-md" />}
+                {msg.image && <img src={msg.image} alt="snap" className="rounded-md max-w-full h-auto" />}
               </div>
               
               {msg.sender === 'me' && (
@@ -92,24 +114,23 @@ export function ChatWindow({ friend }: { friend: Friend }) {
         </div>
       </ScrollArea>
 
-      <div className="p-4 border-t">
-        <div className="relative">
+      <div className="p-4 border-t bg-background">
+        <form onSubmit={handleSubmit} className="flex items-center gap-2">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            onKeyPress={(e) => e.key === 'Enter' && addMessage(inputValue)}
             placeholder="Type a message..."
-            className="pr-24"
+            className="flex-grow"
           />
-          <div className="absolute top-1/2 right-2 -translate-y-1/2 flex items-center gap-1">
-            <Button variant="ghost" size="icon" onClick={() => setIsCameraOpen(true)}>
-              <Camera className="w-5 h-5" />
-            </Button>
-            <Button variant="ghost" size="icon" onClick={() => addMessage(inputValue)}>
-              <Send className="w-5 h-5" />
-            </Button>
-          </div>
-        </div>
+          <Button type="button" variant="ghost" size="icon" onClick={() => setIsCameraOpen(true)}>
+            <Camera className="w-5 h-5" />
+            <span className="sr-only">Open camera</span>
+          </Button>
+          <Button type="submit" size="icon" disabled={!inputValue.trim()}>
+            <Send className="w-5 h-5" />
+            <span className="sr-only">Send message</span>
+          </Button>
+        </form>
       </div>
       <CameraModal 
         isOpen={isCameraOpen} 
