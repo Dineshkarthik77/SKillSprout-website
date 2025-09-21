@@ -47,7 +47,7 @@ export function SharedStreak({ id }: { id: string }) {
           <Progress value={contribution} />
         </div>
         <Button asChild className="w-full" variant="secondary">
-          <Link href="/friends">View Leaderboard</Link>
+          <Link href="#">View Leaderboard</Link>
         </Button>
       </CardContent>
     </DraggableCard>
