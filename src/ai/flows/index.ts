@@ -1,8 +1,33 @@
 import { ai } from '@/ai/genkit';
-import {
-  ChatWithCareerGuideHistorySchema,
-  ChatWithCareerGuideOutputSchema,
-} from './chat-with-career-guide';
+import { z } from 'genkit';
+
+const CareerDomainSchema = z.enum([
+  'Technology',
+  'Creative Arts',
+  'Healthcare',
+  'Business',
+  'undetermined',
+]);
+
+export const ChatWithCareerGuideHistorySchema = z.array(
+  z.object({
+    role: z.enum(['user', 'model']),
+    content: z.string(),
+  })
+);
+export type ChatWithCareerGuideHistory = z.infer<
+  typeof ChatWithCareerGuideHistorySchema
+>;
+
+export const ChatWithCareerGuideOutputSchema = z.object({
+  response: z.string().describe("The AI's response to the user."),
+  recommendedDomain: CareerDomainSchema.describe(
+    "The career domain recommended for the user. Set to 'undetermined' if the conversation is not yet conclusive."
+  ),
+});
+export type ChatWithCareerGuideOutput = z.infer<
+  typeof ChatWithCareerGuideOutputSchema
+>;
 
 const prompt = ai.definePrompt({
   name: 'chatWithCareerGuidePrompt',

@@ -7,36 +7,13 @@
  * - ChatWithCareerGuideOutput - The return type for the chatWithCareerGuide function.
  */
 
-import { z } from 'genkit';
-import { chatWithCareerGuideFlow } from '.';
+import {
+  chatWithCareerGuideFlow,
+  type ChatWithCareerGuideHistory,
+  type ChatWithCareerGuideOutput,
+} from '.';
 
-const CareerDomainSchema = z.enum([
-  'Technology',
-  'Creative Arts',
-  'Healthcare',
-  'Business',
-  'undetermined',
-]);
-
-export const ChatWithCareerGuideHistorySchema = z.array(
-  z.object({
-    role: z.enum(['user', 'model']),
-    content: z.string(),
-  })
-);
-export type ChatWithCareerGuideHistory = z.infer<
-  typeof ChatWithCareerGuideHistorySchema
->;
-
-export const ChatWithCareerGuideOutputSchema = z.object({
-  response: z.string().describe("The AI's response to the user."),
-  recommendedDomain: CareerDomainSchema.describe(
-    "The career domain recommended for the user. Set to 'undetermined' if the conversation is not yet conclusive."
-  ),
-});
-export type ChatWithCareerGuideOutput = z.infer<
-  typeof ChatWithCareerGuideOutputSchema
->;
+export type { ChatWithCareerGuideHistory, ChatWithCareerGuideOutput };
 
 export async function chatWithCareerGuide(
   history: ChatWithCareerGuideHistory
