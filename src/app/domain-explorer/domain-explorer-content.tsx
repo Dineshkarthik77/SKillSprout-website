@@ -68,7 +68,7 @@ const domains: Domain[] = [
     name: 'Business & Finance',
     description: 'Lead, manage, and grow economic value.',
     icon: Banknote,
-    path: '/career-quiz',
+    path: '/business-assessment/1',
   },
   {
     id: 'creative',
