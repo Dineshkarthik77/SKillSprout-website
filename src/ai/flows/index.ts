@@ -86,21 +86,39 @@ const generateQuizPrompt = ai.definePrompt({
   name: 'generateQuizPrompt',
   input: { schema: GenerateQuizInputSchema },
   output: { schema: GenerateQuizOutputSchema },
-  prompt: `You are an expert curriculum developer for professional assessments. Your task is to generate a set of 5 multiple-choice quiz questions for a specific career domain and difficulty level.
+  prompt: `You are an expert curriculum developer. Your task is to generate a set of 5 multiple-choice quiz questions.
+
+{{#if (eq domain "Universal Aptitude")}}
+You are creating a Universal Aptitude test. The questions should be domain-agnostic and focus on logic, creativity, and problem-solving.
+
+Level: {{{level}}}
+
+Instructions for Universal Aptitude Quiz:
+- Generate 5 questions based on the specified level's theme.
+- Level 1 Theme: Foundational Logic. Mix questions covering Pattern Recognition (sequences), Deductive Reasoning (logical conclusions), and Abstract Thinking (conceptual problems).
+- Level 2 Theme: Creative Problem-Solving. Mix questions covering Creative Ideation (new ideas), Resourceful Solutions (working with constraints), and Innovative Thinking (novel uses for objects).
+- Level 3 Theme: Advanced Universal Aptitude. Mix questions covering Strategic Planning (project plans), Adaptability (responding to change), and Ethical Analysis (solving dilemmas).
+- Generate a creative and engaging title for the quiz based on the level's theme.
+
+{{else}}
+You are creating a quiz for a specific career domain.
 
 Domain: {{{domain}}}
 Level: {{{level}}}
 
-Instructions:
+Instructions for Domain-Specific Quiz:
 - The questions should be relevant to the specified domain.
 - The difficulty should correspond to the level:
   - Level 1: Foundational knowledge, basic terminology, and core concepts.
   - Level 2: Application of knowledge, scenario-based questions, and intermediate concepts.
   - Level 3: Advanced topics, critical thinking, and complex problem-solving.
+- Generate a creative and engaging title for the quiz based on the level.
+{{/if}}
+
+General Instructions for All Quizzes:
 - Each question must have exactly 4 options.
 - One option must be clearly the correct answer.
 - Provide a brief, clear explanation for why the correct answer is correct.
-- Generate a creative and engaging title for the quiz based on the level.
 `,
 });
 

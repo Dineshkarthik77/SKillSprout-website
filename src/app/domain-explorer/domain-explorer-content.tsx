@@ -21,6 +21,7 @@ import {
   Building2,
   Bot,
   type LucideIcon,
+  BrainCircuit
 } from 'lucide-react';
 import { useThemeContext } from '@/context/theme-context';
 import { useQuizContext } from '@/context/quiz-context';
@@ -100,10 +101,10 @@ const domains: Domain[] = [
   },
   {
     id: 'other',
-    name: 'Other',
-    description: 'Explore a variety of unique career paths.',
-    icon: Briefcase,
-    path: '/career-quiz',
+    name: 'Universal Aptitude',
+    description: 'Test your core logic and problem-solving skills.',
+    icon: BrainCircuit,
+    path: '/universal-aptitude-assessment/1',
   },
 ];
 
