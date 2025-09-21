@@ -1,5 +1,17 @@
-import { ModelViewer } from "./model-viewer";
+"use client";
+
+import dynamic from 'next/dynamic';
 import { FloatingRockets } from "./floating-rockets";
+import { Skeleton } from '@/components/ui/skeleton';
+
+const ModelViewer = dynamic(
+  () => import('./model-viewer').then(mod => mod.ModelViewer),
+  {
+    ssr: false,
+    loading: () => <Skeleton className="w-full h-full min-h-[400px] md:min-h-0" />,
+  }
+);
+
 
 export function HeroSection() {
   return (

@@ -1,5 +1,7 @@
 "use client";
 
+import * as React from "react";
+
 export function Footer() {
   const [currentYear, setCurrentYear] = React.useState<number | null>(null);
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { Target, Leaf, Rocket } from "lucide-react";
 import { FeatureCard } from "./feature-card";
 
