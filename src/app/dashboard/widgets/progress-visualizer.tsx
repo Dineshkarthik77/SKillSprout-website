@@ -11,7 +11,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { useThemeContext } from '@/context/theme-context';
 import { useQuizContext } from '@/context/quiz-context';
 
-const ModelViewer = dynamic(() => import('@/components/homepage/model-viewer').then(mod => mod.ModelViewer), {
+const ModelViewer = dynamic(() => import('./model-viewer-wrapper').then(mod => mod.ModelViewerWrapper), {
   ssr: false,
   loading: () => <Skeleton className="w-full h-[400px]" />,
 });
@@ -46,15 +46,7 @@ export function ProgressVisualizer({ id }: { id: string }) {
       </CardHeader>
       <CardContent>
         <div className="w-full h-[400px] bg-muted rounded-lg mb-4">
-           <model-viewer
-              src={currentModel}
-              alt="A 3D model representing your progress"
-              ar
-              ar-modes="webxr scene-viewer quick-look"
-              autoplay
-              camera-controls
-              style={{ width: '100%', height: '100%' }}
-            />
+           <ModelViewer src={currentModel} />
         </div>
         <div className="space-y-4">
             <div className='flex justify-between items-center'>
