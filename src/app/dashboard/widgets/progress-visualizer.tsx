@@ -17,9 +17,21 @@ const ModelViewer = dynamic(() => import('./model-viewer-wrapper').then(mod => m
 });
 
 const themeModels: Record<string, string[]> = {
-  'cs': ['/models/RobotExpressive.glb', '/models/Laptop.glb', '/models/Server.glb'],
-  'mech': ['/models/Hammer.glb', '/models/Wrench.glb', '/models/Engine.glb'],
-  'default': ['/models/Astronaut.glb', '/models/RocketShip.glb', '/models/Planet.glb'],
+  'cs': [
+    'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', 
+    'https://modelviewer.dev/shared-assets/models/Laptop.glb', 
+    'https://modelviewer.dev/shared-assets/models/Server.glb'
+  ],
+  'mech': [
+    'https://modelviewer.dev/shared-assets/models/Hammer.glb', 
+    'https://modelviewer.dev/shared-assets/models/Wrench.glb', 
+    'https://modelviewer.dev/shared-assets/models/Engine.glb'
+  ],
+  'default': [
+    'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
+    'https://modelviewer.dev/shared-assets/models/RocketShip.glb', 
+    'https://modelviewer.dev/shared-assets/models/Planet.glb'
+  ],
 };
 
 export function ProgressVisualizer({ id }: { id: string }) {
