@@ -79,8 +79,7 @@ export function LegalAssessmentContent({ level }: { level: number }) {
       if (level < 3) {
         router.push(`/legal-assessment/${level + 1}`);
       } else {
-        // Placeholder for navigating to report page
-        router.push(`/report?score=${correctAnswers}`);
+        router.push(`/career-storyboard?domain=Legal`);
       }
     }
   };

@@ -79,8 +79,7 @@ export function SkilledTradesAssessmentContent({ level }: { level: number }) {
       if (level < 3) {
         router.push(`/skilled-trades-assessment/${level + 1}`);
       } else {
-        // Placeholder for navigating to report page
-        router.push(`/report?score=${correctAnswers}`);
+        router.push(`/career-storyboard?domain=Skilled Trades & Artisanship`);
       }
     }
   };

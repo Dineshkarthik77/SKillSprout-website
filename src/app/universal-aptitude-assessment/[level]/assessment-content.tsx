@@ -79,8 +79,7 @@ export function UniversalAptitudeAssessmentContent({ level }: { level: number })
       if (level < 3) {
         router.push(`/universal-aptitude-assessment/${level + 1}`);
       } else {
-        // Placeholder for navigating to report page
-        router.push(`/report?score=${correctAnswers}`);
+        router.push(`/career-storyboard?domain=Universal Aptitude`);
       }
     }
   };

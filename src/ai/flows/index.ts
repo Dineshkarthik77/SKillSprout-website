@@ -226,3 +226,50 @@ export const getLearningRecommendationsFlow = ai.defineFlow(
     return output!;
   }
 );
+
+// Schemas and flows for generateCareerStoryboard
+export const GenerateCareerStoryboardInputSchema = z.object({
+  domain: z.string().describe('The career domain the user was assessed on (e.g., "Technology").')
+});
+export type GenerateCareerStoryboardInput = z.infer<typeof GenerateCareerStoryboardInputSchema>;
+
+const StoryboardCardSchema = z.object({
+  jobTitle: z.string().describe('The title of the recommended job (e.g., "AI & Machine Learning Engineer").'),
+  description: z.string().describe('A brief, one-sentence description of the role.'),
+  demand: z.enum(['High Demand', 'Growing Market', 'Stable']).describe('The current market demand for this role.'),
+  requiredSkills: z.array(z.string()).describe('A list of 3-5 key skills required for the job.'),
+  salaryRange: z.string().describe('The potential salary range for this role (e.g., "$120,000 - $180,000").'),
+  dayInTheLife: z.string().describe('A brief, engaging "day in the life" scenario for someone in this role.'),
+});
+
+export const GenerateCareerStoryboardOutputSchema = z.array(StoryboardCardSchema).length(3).describe('A list of exactly three job recommendations.');
+export type GenerateCareerStoryboardOutput = z.infer<typeof GenerateCareerStoryboardOutputSchema>;
+
+const generateCareerStoryboardPrompt = ai.definePrompt({
+  name: 'generateCareerStoryboardPrompt',
+  input: { schema: GenerateCareerStoryboardInputSchema },
+  output: { schema: GenerateCareerStoryboardOutputSchema },
+  prompt: `You are an expert AI career counselor. Your task is to generate three distinct, actionable, and inspiring job recommendations for a user based on their performance in a specific career domain assessment.
+
+Domain of Assessment: {{{domain}}}
+
+For this domain, create three unique job profiles. For each job profile, provide the following details:
+1.  **Job Title**: A clear and common job title.
+2.  **Description**: A compelling, one-sentence summary of the role.
+3.  **Demand**: The current market demand for the role. Choose from 'High Demand', 'Growing Market', or 'Stable'.
+4.  **Required Skills**: A list of 3-5 essential skills for this job. These will be used to generate a learning path.
+5.  **Salary Range**: A realistic salary range for this position in a major tech market.
+6.  **Day in the Life**: A short, narrative paragraph describing a typical day in this role.
+
+Ensure the recommendations are diverse but still highly relevant to the user's assessed domain.
+`,
+});
+
+export const generateCareerStoryboardFlow = ai.defineFlow({
+  name: 'generateCareerStoryboardFlow',
+  inputSchema: GenerateCareerStoryboardInputSchema,
+  outputSchema: GenerateCareerStoryboardOutputSchema,
+}, async (input) => {
+  const { output } = await generateCareerStoryboardPrompt(input);
+  return output!;
+});
