@@ -15,6 +15,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { useQuizContext } from '@/context/quiz-context';
 
 type PageState = 'loading' | 'loaded' | 'error';
 type AnswerState = 'unanswered' | 'correct' | 'incorrect';
@@ -22,6 +23,7 @@ type AnswerState = 'unanswered' | 'correct' | 'incorrect';
 export function TechAssessmentContent({ level }: { level: number }) {
   const router = useRouter();
   const { toast } = useToast();
+  const { setTechAssessmentScore } = useQuizContext();
   const [pageState, setPageState] = useState<PageState>('loading');
   const [quizData, setQuizData] = useState<GenerateQuizOutput | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -75,12 +77,13 @@ export function TechAssessmentContent({ level }: { level: number }) {
     if (currentQuestionIndex < quizData.questions.length - 1) {
       setCurrentQuestionIndex(prev => prev + 1);
     } else {
-      // End of quiz logic
+      const score = (correctAnswers / quizData.questions.length) * 100;
+      setTechAssessmentScore(level, score);
+      
       if (level < 3) {
         router.push(`/tech-assessment/${level + 1}`);
       } else {
-        // Placeholder for navigating to report page
-        router.push(`/report?score=${correctAnswers}`);
+        router.push('/strategic-blueprint');
       }
     }
   };

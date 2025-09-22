@@ -20,6 +20,9 @@ export function Header() {
             <Link href="/domain-explorer">Domain Explorer</Link>
           </Button>
            <Button variant="ghost" asChild>
+            <Link href="/strategic-blueprint">Blueprint</Link>
+          </Button>
+           <Button variant="ghost" asChild>
             <Link href="/pro-path?gaps=%5B%22Data%20Analysis%22%2C%22Machine%20Learning%22%5D&style=visual">Learning Path</Link>
           </Button>
            <Button variant="ghost" asChild>

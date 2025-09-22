@@ -2,23 +2,43 @@
 
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
+type TechAssessmentScores = {
+  level1: number;
+  level2: number;
+  level3: number;
+};
+
 type QuizContextType = {
+  techAssessmentScores: TechAssessmentScores;
+  setTechAssessmentScore: (level: number, score: number) => void;
   resetAssessments: () => void;
 };
 
 const QuizContext = createContext<QuizContextType | undefined>(undefined);
 
+const initialScores: TechAssessmentScores = {
+  level1: 0,
+  level2: 0,
+  level3: 0,
+};
+
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
-  // This is a placeholder. In a real app, you'd have state here.
-  const [assessments, setAssessments] = useState({}); 
+  const [techAssessmentScores, setTechAssessmentScores] = useState<TechAssessmentScores>(initialScores); 
+
+  const setTechAssessmentScore = (level: number, score: number) => {
+    setTechAssessmentScores(prevScores => ({
+      ...prevScores,
+      [`level${level}`]: score,
+    }));
+  };
 
   const resetAssessments = () => {
     console.log("Assessments reset!");
-    setAssessments({});
+    setTechAssessmentScores(initialScores);
   };
 
   return (
-    <QuizContext.Provider value={{ resetAssessments }}>
+    <QuizContext.Provider value={{ techAssessmentScores, setTechAssessmentScore, resetAssessments }}>
       {children}
     </QuizContext.Provider>
   );
