@@ -18,13 +18,13 @@ const ModelViewer = dynamic(() => import('./model-viewer-wrapper').then(mod => m
 const themeModels: Record<string, string[]> = {
   'cs': [
     'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', 
-    'https://modelviewer.dev/shared-assets/models/Desktop.glb', 
+    'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', 
     'https://modelviewer.dev/shared-assets/models/Server.glb'
   ],
   'mech': [
     'https://modelviewer.dev/shared-assets/models/ScifiHelicopter.glb',
     'https://modelviewer.dev/shared-assets/models/gears.glb',
-    'https://modelviewer.dev/shared-assets/models/Welder.glb'
+    'https://modelviewer.dev/shared-assets/models/BusterDrone.glb'
   ],
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
