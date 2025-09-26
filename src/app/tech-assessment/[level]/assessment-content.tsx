@@ -80,7 +80,9 @@ export function TechAssessmentContent({ level }: { level: number }) {
       const score = (correctAnswers / quizData.questions.length) * 100;
       setTechAssessmentScore(level, score);
       
-      if (level < 3) {
+      if (level === 1) {
+        router.push(`/tech-assessment/1/coding-challenge`);
+      } else if (level < 3) {
         router.push(`/tech-assessment/${level + 1}`);
       } else {
         router.push('/strategic-blueprint');
@@ -157,7 +159,7 @@ export function TechAssessmentContent({ level }: { level: number }) {
             </Button>
           ) : (
             <Button onClick={handleNextQuestion}>
-              {currentQuestionIndex < quizData.questions.length - 1 ? "Next Question" : "Finish Level"}
+              {currentQuestionIndex < quizData.questions.length - 1 ? "Next Question" : "Finish Round"}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           )}
