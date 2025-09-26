@@ -1,3 +1,4 @@
+
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
@@ -330,4 +331,91 @@ export const generateRepairScenarioFlow = ai.defineFlow(
   }
 );
 
-    
+
+// Schemas and flows for Education Assessment (Level 2)
+export const GenerateLessonPlanScenarioOutputSchema = z.object({
+  subject: z.string().describe("The subject of the lesson (e.g., 'Mathematics', 'History')."),
+  gradeLevel: z.string().describe("The grade level for the class (e.g., '5th Grade', 'High School')."),
+  studentNeed: z.string().describe("A specific challenge or need in the classroom to address (e.g., 'A student who is visually impaired', 'A highly gifted student who gets bored easily')."),
+  options: z.object({
+    learningObjectives: z.array(z.string()).length(3).describe("Three distinct options for a learning objective."),
+    activities: z.array(z.string()).length(3).describe("Three distinct options for an engaging activity."),
+    assessments: z.array(z.string()).length(3).describe("Three distinct options for an assessment method."),
+  }),
+});
+export type GenerateLessonPlanScenarioOutput = z.infer<typeof GenerateLessonPlanScenarioOutputSchema>;
+
+const generateLessonPlanScenarioPrompt = ai.definePrompt({
+  name: 'generateLessonPlanScenarioPrompt',
+  output: { schema: GenerateLessonPlanScenarioOutputSchema },
+  prompt: `You are an expert instructional designer. Your task is to create a dynamic scenario for a Level 2 Education assessment where a user must build a lesson plan.
+
+Generate a scenario with the following components:
+1.  **Subject**: Pick a common school subject.
+2.  **Grade Level**: Choose an appropriate grade level for the subject.
+3.  **Student Need**: Create a specific, realistic challenge or student need that the lesson plan must address. This is the core of the puzzle.
+4.  **Options**: For each of the following categories, provide three distinct and plausible options. One option should be clearly superior for addressing the 'Student Need', while the others are less effective but still reasonable.
+    -   Learning Objectives
+    -   Engaging Activities
+    -   Assessment Methods
+
+Ensure the options are not obviously right or wrong, but require some thought about the specific 'Student Need'.
+`,
+});
+
+export const generateLessonPlanScenarioFlow = ai.defineFlow(
+  {
+    name: 'generateLessonPlanScenarioFlow',
+    outputSchema: GenerateLessonPlanScenarioOutputSchema,
+  },
+  async () => {
+    const { output } = await generateLessonPlanScenarioPrompt();
+    return output!;
+  }
+);
+
+export const EvaluateLessonPlanInputSchema = z.object({
+  scenario: GenerateLessonPlanScenarioOutputSchema.describe("The original scenario presented to the user."),
+  learningObjective: z.string().describe("The learning objective chosen by the user."),
+  activity: z.string().describe("The activity chosen by the user."),
+  assessment: z.string().describe("The assessment method chosen by the user."),
+});
+export type EvaluateLessonPlanInput = z.infer<typeof EvaluateLessonPlanInputSchema>;
+
+export const EvaluateLessonPlanOutputSchema = z.object({
+  feedback: z.string().describe("Constructive feedback on the user's lesson plan choices, explaining why they are effective or how they could be improved in relation to the specific student need."),
+});
+export type EvaluateLessonPlanOutput = z.infer<typeof EvaluateLessonPlanOutputSchema>;
+
+const evaluateLessonPlanPrompt = ai.definePrompt({
+  name: 'evaluateLessonPlanPrompt',
+  input: { schema: EvaluateLessonPlanInputSchema },
+  output: { schema: EvaluateLessonPlanOutputSchema },
+  prompt: `You are an expert teaching coach. A user has created a lesson plan based on a scenario you provided. Your task is to provide constructive feedback on their choices.
+
+**The Scenario:**
+-   **Subject**: {{{scenario.subject}}}
+-   **Grade Level**: {{{scenario.gradeLevel}}}
+-   **Key Challenge**: {{{scenario.studentNeed}}}
+
+**The User's Lesson Plan:**
+-   **Learning Objective**: {{{learningObjective}}}
+-   **Activity**: {{{activity}}}
+-   **Assessment**: {{{assessment}}}
+
+**Your Task:**
+Write a brief, encouraging paragraph of feedback (2-4 sentences). Analyze how well the user's choices work together to address the specific 'Key Challenge'. Explain the strengths of their plan and, if applicable, suggest one area for improvement.
+`,
+});
+
+export const evaluateLessonPlanFlow = ai.defineFlow(
+  {
+    name: 'evaluateLessonPlanFlow',
+    inputSchema: EvaluateLessonPlanInputSchema,
+    outputSchema: EvaluateLessonPlanOutputSchema,
+  },
+  async (input) => {
+    const { output } = await evaluateLessonPlanPrompt(input);
+    return output!;
+  }
+);
