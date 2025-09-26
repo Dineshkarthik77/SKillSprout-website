@@ -105,7 +105,7 @@ export function BusinessAssessmentContent({ level }: { level: number }) {
       <Alert variant="destructive" className="max-w-2xl mx-auto">
         <AlertTitle>Error</AlertTitle>
         <AlertDescription>
-          Failed to load the assessment. Please try returning to the domain explorer.
+          Failed to load the assessment. Please try again.
         </AlertDescription>
         <Button onClick={fetchQuiz} variant="secondary" className="mt-4">
           <RefreshCw className="mr-2 h-4 w-4" />
