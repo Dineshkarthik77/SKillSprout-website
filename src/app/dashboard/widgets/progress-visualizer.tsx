@@ -25,7 +25,7 @@ const themeModels: Record<string, string[]> = {
   'mech': [
     'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb',
     'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb',
-    'https://modelviewer.dev/shared-assets/models/BusterDrone.glb'
+    'https://modelviewer.dev/shared-assets/models/Astronaut.glb'
   ],
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
