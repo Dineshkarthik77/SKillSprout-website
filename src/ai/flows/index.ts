@@ -113,7 +113,7 @@ Level: {{{level}}}
 Instructions for Domain-Specific Quiz:
 - The questions should be relevant to the specified domain.
 - The difficulty should correspond to the level:
-  - Level 1: Foundational knowledge, basic terminology, and core concepts. For the 'Technology' domain specifically, make the questions simple, interesting, and short (around 2 lines) to be encouraging for beginners.
+  - Level 1: Foundational knowledge, basic terminology, and core concepts. For the 'Technology' domain specifically, ask simple and interesting questions (around 2 lines) about exciting topics like basic AI, VR, game development, robotics, and 3D design to be encouraging for beginners.
   - Level 2: Application of knowledge, scenario-based questions, and intermediate concepts.
   - Level 3: Advanced topics, critical thinking, and complex problem-solving.
 - Generate a creative and engaging title for the quiz based on the level.
