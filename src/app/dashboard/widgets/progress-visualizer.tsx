@@ -23,7 +23,7 @@ const themeModels: Record<string, string[]> = {
     'https://modelviewer.dev/shared-assets/models/Horse.glb'
   ],
   'mech': [
-    'https://modelviewer.dev/shared-assets/models/ScifiHelicopter.glb',
+    'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb',
     'https://modelviewer.dev/shared-assets/models/gears.glb',
     'https://modelviewer.dev/shared-assets/models/BusterDrone.glb'
   ],
