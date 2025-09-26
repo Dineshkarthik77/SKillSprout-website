@@ -5,7 +5,6 @@ import React, { createContext, useContext, useState, ReactNode } from 'react';
 type TechAssessmentScores = {
   level1: number;
   level2: number;
-  level3: number;
 };
 
 type QuizContextType = {
@@ -19,13 +18,13 @@ const QuizContext = createContext<QuizContextType | undefined>(undefined);
 const initialScores: TechAssessmentScores = {
   level1: 0,
   level2: 0,
-  level3: 0,
 };
 
 export const QuizProvider = ({ children }: { children: ReactNode }) => {
   const [techAssessmentScores, setTechAssessmentScores] = useState<TechAssessmentScores>(initialScores); 
 
   const setTechAssessmentScore = (level: number, score: number) => {
+    if (level > 2) return; // We only have 2 levels now
     setTechAssessmentScores(prevScores => ({
       ...prevScores,
       [`level${level}`]: score,

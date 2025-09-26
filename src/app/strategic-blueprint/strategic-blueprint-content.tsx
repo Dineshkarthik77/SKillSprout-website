@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { BarChart, BrainCircuit, Lightbulb, ShieldCheck, CheckCircle, Target, Loader2, type LucideIcon } from 'lucide-react';
+import { BarChart, BrainCircuit, Lightbulb, CheckCircle, Target, Loader2, type LucideIcon } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Progress } from '@/components/ui/progress';
@@ -21,7 +21,6 @@ type Skill = {
 const techSkills: Record<string, Omit<Skill, 'score'>> = {
   foundational: { id: 'foundational', name: 'Foundational Knowledge', icon: BrainCircuit },
   applied: { id: 'applied', name: 'Applied Technical Scenario', icon: Lightbulb },
-  advanced: { id: 'advanced', name: 'Advanced Problem-Solving', icon: ShieldCheck },
 };
 
 export function StrategicBlueprintContent() {
@@ -34,7 +33,6 @@ export function StrategicBlueprintContent() {
   const scores = [
     { ...techSkills.foundational, score: techAssessmentScores.level1 },
     { ...techSkills.applied, score: techAssessmentScores.level2 },
-    { ...techSkills.advanced, score: techAssessmentScores.level3 },
   ];
 
   const totalScore = scores.reduce((acc, s) => acc + s.score, 0);
@@ -87,7 +85,7 @@ export function StrategicBlueprintContent() {
         </CardContent>
       </Card>
       
-      <div className="grid md:grid-cols-3 gap-8">
+      <div className="grid md:grid-cols-2 gap-8">
         {scores.map((skill) => {
           const Icon = skill.icon;
           return (

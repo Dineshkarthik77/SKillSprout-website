@@ -83,13 +83,14 @@ export function TechAssessmentContent({ level }: { level: number }) {
       
       if (level === 1) {
         router.push(`/tech-assessment/1/coding-challenge`);
-      } else if (level < 3) {
+      } else if (level < 2) {
         router.push(`/tech-assessment/${level + 1}`);
       } else {
          // Final level logic
         const finalScores = { ...techAssessmentScores, [`level${level}`]: score };
-        const totalScore = Object.values(finalScores).reduce((acc, s) => acc + s, 0);
-        const averageScore = totalScore / 3;
+        // Since we removed level 3, we only average over 2 levels
+        const totalScore = finalScores.level1 + finalScores.level2;
+        const averageScore = totalScore / 2;
 
         if (averageScore < 40) {
           router.push('/low-score-report');
@@ -180,7 +181,7 @@ export function TechAssessmentContent({ level }: { level: number }) {
               Skip Question
             </Button>
           )}
-        </CardFooter>
+        </Footer>
       </Card>
     </div>
   );
