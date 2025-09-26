@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -35,7 +36,8 @@ export function TechAssessmentContent({ level }: { level: number }) {
     const fetchQuiz = async () => {
       setPageState('loading');
       try {
-        const result = await generateQuiz({ domain: 'Technology', level });
+        // Forcing intermediate level as requested
+        const result = await generateQuiz({ domain: 'Technology', level: 2 });
         setQuizData(result);
         setPageState('loaded');
       } catch (error) {
@@ -152,15 +154,22 @@ export function TechAssessmentContent({ level }: { level: number }) {
             })}
           </RadioGroup>
         </CardContent>
-        <CardFooter>
-          {answerState === 'unanswered' ? (
-             <Button onClick={handleCheckAnswer} disabled={!selectedAnswer}>
-              Check Answer
-            </Button>
-          ) : (
-            <Button onClick={handleNextQuestion}>
-              {currentQuestionIndex < quizData.questions.length - 1 ? "Next Question" : "Finish Round"}
-              <ArrowRight className="ml-2 h-4 w-4" />
+        <CardFooter className="flex justify-between">
+          <div>
+            {answerState === 'unanswered' ? (
+              <Button onClick={handleCheckAnswer} disabled={!selectedAnswer}>
+                Check Answer
+              </Button>
+            ) : (
+              <Button onClick={handleNextQuestion}>
+                {currentQuestionIndex < quizData.questions.length - 1 ? "Next Question" : "Finish Level"}
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            )}
+          </div>
+          {answerState === 'unanswered' && (
+             <Button variant="outline" onClick={handleNextQuestion}>
+              Skip Question
             </Button>
           )}
         </CardFooter>
