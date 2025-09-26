@@ -1,3 +1,4 @@
+
 'use client';
 
 import React from 'react';
@@ -19,7 +20,7 @@ const themeModels: Record<string, string[]> = {
   'cs': [
     'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', 
     'https://modelviewer.dev/shared-assets/models/RobotExpressive.glb', 
-    'https://modelviewer.dev/shared-assets/models/FlightHelmet.glb'
+    'https://modelviewer.dev/shared-assets/models/Horse.glb'
   ],
   'mech': [
     'https://modelviewer.dev/shared-assets/models/ScifiHelicopter.glb',
@@ -29,7 +30,7 @@ const themeModels: Record<string, string[]> = {
   'default': [
     'https://modelviewer.dev/shared-assets/models/Astronaut.glb', 
     'https://modelviewer.dev/shared-assets/models/RocketShip.glb', 
-    'https://modelviewer.dev/shared-assets/models/FlightHelmet.glb'
+    'https://modelviewer.dev/shared-assets/models/Horse.glb'
   ],
 };
 
