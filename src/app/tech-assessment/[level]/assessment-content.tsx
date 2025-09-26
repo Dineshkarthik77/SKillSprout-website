@@ -36,8 +36,7 @@ export function TechAssessmentContent({ level }: { level: number }) {
     const fetchQuiz = async () => {
       setPageState('loading');
       try {
-        // Forcing intermediate level as requested
-        const result = await generateQuiz({ domain: 'Technology', level: 2 });
+        const result = await generateQuiz({ domain: 'Technology', level });
         setQuizData(result);
         setPageState('loaded');
       } catch (error) {
