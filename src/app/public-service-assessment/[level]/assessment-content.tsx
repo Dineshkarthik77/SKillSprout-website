@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import {
   generateQuiz,
@@ -10,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Loader2, ArrowRight } from 'lucide-react';
+import { Loader2, ArrowRight, RefreshCw } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
@@ -29,21 +30,21 @@ export function PublicServiceAssessmentContent({ level }: { level: number }) {
   const [answerState, setAnswerState] = useState<AnswerState>('unanswered');
   const [correctAnswers, setCorrectAnswers] = useState(0);
 
-  useEffect(() => {
-    const fetchQuiz = async () => {
-      setPageState('loading');
-      try {
-        const result = await generateQuiz({ domain: 'Public Service & Administration', level });
-        setQuizData(result);
-        setPageState('loaded');
-      } catch (error) {
-        console.error('Failed to generate quiz:', error);
-        setPageState('error');
-      }
-    };
-
-    fetchQuiz();
+  const fetchQuiz = useCallback(async () => {
+    setPageState('loading');
+    try {
+      const result = await generateQuiz({ domain: 'Public Service & Administration', level });
+      setQuizData(result);
+      setPageState('loaded');
+    } catch (error) {
+      console.error('Failed to generate quiz:', error);
+      setPageState('error');
+    }
   }, [level]);
+
+  useEffect(() => {
+    fetchQuiz();
+  }, [fetchQuiz]);
 
   const handleCheckAnswer = () => {
     if (!selectedAnswer || !quizData) return;
@@ -106,6 +107,10 @@ export function PublicServiceAssessmentContent({ level }: { level: number }) {
         <AlertDescription>
           Failed to load the assessment. Please try returning to the domain explorer.
         </AlertDescription>
+        <Button onClick={fetchQuiz} variant="secondary" className="mt-4">
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Retry
+        </Button>
       </Alert>
     );
   }
