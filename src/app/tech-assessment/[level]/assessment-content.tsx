@@ -181,7 +181,7 @@ export function TechAssessmentContent({ level }: { level: number }) {
               Skip Question
             </Button>
           )}
-        </Footer>
+        </CardFooter>
       </Card>
     </div>
   );
