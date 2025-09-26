@@ -279,3 +279,53 @@ export const generateCareerStoryboardFlow = ai.defineFlow({
   const { output } = await generateCareerStoryboardPrompt(input);
   return output!;
 });
+
+// Schemas and flows for generateRepairScenario
+const ToolSchema = z.object({
+  id: z.string().describe('A unique ID for the tool, e.g., "wrench"'),
+  name: z.string().describe('The name of the tool, e.g., "Pipe Wrench"'),
+});
+
+export const GenerateRepairScenarioOutputSchema = z.object({
+  title: z.string().describe('A creative title for the scenario, e.g., "The Case of the Leaky Pipe".'),
+  description: z.string().describe('A brief description of the problem to be solved.'),
+  imageUrl: z.string().url().describe('A URL for an image representing the broken item.'),
+  imageHint: z.string().describe('A one or two-word hint for the image.'),
+  availableTools: z.array(ToolSchema).describe('A list of 7-8 available tools, including both necessary and incorrect ones.'),
+  correctSteps: z.array(z.string()).describe('A list of the correct tool IDs in the proper order to solve the problem.'),
+});
+export type GenerateRepairScenarioOutput = z.infer<typeof GenerateRepairScenarioOutputSchema>;
+
+const generateRepairScenarioPrompt = ai.definePrompt({
+  name: 'generateRepairScenarioPrompt',
+  output: { schema: GenerateRepairScenarioOutputSchema },
+  prompt: `You are a master technician and puzzle designer. Your task is to create a simple, logical repair scenario for a user to solve. The scenario should be solvable in 3-4 steps.
+
+Generate a scenario from one of the following domains: Plumbing, Automotive, or basic Electronics.
+
+For the scenario, provide the following:
+1.  **Title**: A creative title for the puzzle.
+2.  **Description**: A clear, concise description of the problem.
+3.  **Image**: A placeholder image URL from picsum.photos (e.g., "https://picsum.photos/seed/pipe-leak/600/400") and a 1-2 word hint for the image.
+4.  **Available Tools**: A list of 7-8 tools. This list must include the tools needed for the correct steps, plus several distractor tools. Each tool needs a unique ID (lowercase, no spaces) and a display name.
+5.  **Correct Steps**: A list of the correct tool IDs, in the exact order they should be used to complete the repair. The list should have 3-4 steps.
+
+Example Scenario:
+- **Title**: "The Silent Engine"
+- **Description**: "A small lawnmower engine won't start. It was working yesterday, but now it only makes a clicking sound. The fuel tank is full."
+- **Image URL**: "https://picsum.photos/seed/engine/600/400", Hint: "lawnmower engine"
+- **Available Tools**: [{id: "screwdriver", name: "Screwdriver"}, {id: "spark_plug_wrench", name: "Spark Plug Wrench"}, {id: "rag", name: "Clean Rag"}, {id: "oil_can", name: "Oil Can"}, {id: "hammer", name: "Hammer"}, {id: "duct_tape", name: "Duct Tape"}, {id: "new_spark_plug", name: "New Spark Plug"}]
+- **Correct Steps**: ["screwdriver", "spark_plug_wrench", "new_spark_plug", "spark_plug_wrench"]
+`,
+});
+
+export const generateRepairScenarioFlow = ai.defineFlow(
+  {
+    name: 'generateRepairScenarioFlow',
+    outputSchema: GenerateRepairScenarioOutputSchema,
+  },
+  async () => {
+    const { output } = await generateRepairScenarioPrompt();
+    return output!;
+  }
+);
