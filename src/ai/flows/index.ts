@@ -113,7 +113,13 @@ Level: {{{level}}}
 Instructions for Domain-Specific Quiz:
 - The questions should be relevant to the specified domain.
 - The difficulty should correspond to the level:
-  - Level 1: Foundational knowledge, basic terminology, and core concepts. For the 'Technology' domain specifically, ask simple and interesting questions (around 2 lines) about exciting topics like basic AI, VR, game development, robotics, 3D design, Digital Content Creation, Web Development, Internet of Things (IoT), Cybersecurity, Biotechnology, Drone Technology, Blockchain, Extended Reality (XR), Digital Marketing, and Autonomous Systems to be encouraging for beginners.
+  - Level 1: Foundational knowledge, basic terminology, and core concepts. 
+    - For the 'Technology' domain specifically, ask simple and interesting questions (around 2 lines) about exciting topics like basic AI, VR, game development, robotics, 3D design, Digital Content Creation, Web Development, Internet of Things (IoT), Cybersecurity, Biotechnology, Drone Technology, Blockchain, Extended Reality (XR), Digital Marketing, and Autonomous Systems to be encouraging for beginners.
+    - For the 'Skilled Trades & Artisanship' domain specifically, create interesting questions that are not too complex or simple. The questions should cover a mix of topics from the following categories:
+      - Construction and Building Trades (e.g., Carpentry, Electrical, Plumbing, Masonry, HVAC)
+      - Mechanical and Industrial Trades (e.g., Automotive Technology, Welding, Machinists, Industrial Maintenance)
+      - Personal and Service Trades (e.g., Cosmetology, Culinary Arts, Barbering)
+      - Artisanship and Craftsmanship (e.g., Woodworking, Jewelry Making, Glassblowing, Pottery, Textile Arts)
   - Level 2: Application of knowledge, scenario-based questions, and intermediate concepts.
   - Level 3: Advanced topics, critical thinking, and complex problem-solving.
 - Generate a creative and engaging title for the quiz based on the level.
