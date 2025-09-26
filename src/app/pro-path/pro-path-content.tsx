@@ -1,6 +1,7 @@
+
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -25,6 +26,7 @@ import {
   Award,
   CheckCircle,
   Loader2,
+  RefreshCw,
   type LucideIcon,
 } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
@@ -52,32 +54,35 @@ export function ProPathContent() {
   const [pageState, setPageState] = useState<PageState>('loading');
   const [data, setData] = useState<GetLearningRecommendationsOutput | null>(null);
 
-  useEffect(() => {
+  const fetchData = useCallback(async () => {
     const gapsParam = searchParams.get('gaps');
     const styleParam = searchParams.get('style');
 
     if (!gapsParam || !styleParam) {
-      router.push('/strategic-blueprint'); // A placeholder page
+      router.push('/strategic-blueprint'); 
       return;
     }
 
-    const fetchData = async () => {
-      try {
-        const gaps = JSON.parse(gapsParam);
-        const result = await getLearningRecommendations({
-          gaps,
-          style: styleParam,
-        });
-        setData(result);
-        setPageState('loaded');
-      } catch (error) {
-        console.error('Failed to get learning recommendations:', error);
-        setPageState('error');
-      }
-    };
+    setPageState('loading');
+    setData(null);
 
-    fetchData();
+    try {
+      const gaps = JSON.parse(gapsParam);
+      const result = await getLearningRecommendations({
+        gaps,
+        style: styleParam,
+      });
+      setData(result);
+      setPageState('loaded');
+    } catch (error) {
+      console.error('Failed to get learning recommendations:', error);
+      setPageState('error');
+    }
   }, [searchParams, router]);
+
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
 
   if (pageState === 'loading') {
     return (
@@ -96,10 +101,14 @@ export function ProPathContent() {
   if (pageState === 'error' || !data) {
     return (
        <Alert variant="destructive" className="max-w-2xl mx-auto">
-        <AlertTitle>Error</AlertTitle>
+        <AlertTitle>Service Unavailable</AlertTitle>
         <AlertDescription>
-          Failed to generate your learning path. Please try again later.
+          Failed to generate your learning path due to a temporary issue. Please try again in a moment.
         </AlertDescription>
+        <Button onClick={fetchData} variant="secondary" className="mt-4">
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Retry
+        </Button>
       </Alert>
     );
   }
