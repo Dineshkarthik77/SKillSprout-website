@@ -24,7 +24,7 @@ type AnswerState = 'unanswered' | 'correct' | 'incorrect';
 export function TechAssessmentContent({ level }: { level: number }) {
   const router = useRouter();
   const { toast } = useToast();
-  const { setTechAssessmentScore } = useQuizContext();
+  const { techAssessmentScores, setTechAssessmentScore } = useQuizContext();
   const [pageState, setPageState] = useState<PageState>('loading');
   const [quizData, setQuizData] = useState<GenerateQuizOutput | null>(null);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -87,7 +87,16 @@ export function TechAssessmentContent({ level }: { level: number }) {
       } else if (level < 3) {
         router.push(`/tech-assessment/${level + 1}`);
       } else {
-        router.push('/strategic-blueprint');
+         // Final level logic
+        const finalScores = { ...techAssessmentScores, [`level${level}`]: score };
+        const totalScore = Object.values(finalScores).reduce((acc, s) => acc + s, 0);
+        const averageScore = totalScore / 3;
+
+        if (averageScore < 40) {
+          router.push('/low-score-report');
+        } else {
+          router.push('/strategic-blueprint');
+        }
       }
     }
   };

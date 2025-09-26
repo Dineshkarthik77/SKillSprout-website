@@ -82,10 +82,15 @@ export function CodingChallengeContent() {
           )}
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button onClick={handleRunCode} disabled={isRunning}>
-            {isRunning && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Run Code
-          </Button>
+          <div className="flex gap-2">
+            <Button onClick={handleRunCode} disabled={isRunning}>
+              {isRunning && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              Run Code
+            </Button>
+             <Button variant="outline" onClick={handleProceed}>
+              Skip Challenge
+            </Button>
+          </div>
           {isCorrect && (
             <Button onClick={handleProceed}>
               Proceed to Level 2
