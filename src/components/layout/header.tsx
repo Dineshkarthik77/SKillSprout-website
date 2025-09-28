@@ -14,13 +14,16 @@ export function Header() {
         </Link>
         <nav className="hidden md:flex items-center gap-2">
           <Button variant="ghost" asChild>
+            <Link href="/feed">Feed</Link>
+          </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/friends">Friends</Link>
+          </Button>
+          <Button variant="ghost" asChild>
             <Link href="/career-gateway">AI Gateway</Link>
           </Button>
           <Button variant="ghost" asChild>
             <Link href="/domain-explorer">Domain Explorer</Link>
-          </Button>
-          <Button variant="ghost" asChild>
-            <Link href="/pro-path">Pro Path</Link>
           </Button>
           <Button asChild variant="secondary">
             <Link href="/dashboard">Dashboard</Link>
