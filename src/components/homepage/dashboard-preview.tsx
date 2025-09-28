@@ -28,7 +28,7 @@ export function DashboardPreview() {
             <Zap className="w-5 h-5 text-primary-foreground" />
          </div>
          <h2 className="text-xl font-bold text-accent-foreground mt-8">EVERY EXPERT WAS ONCE A BEGINNER</h2>
-         <p className="text-sm text-accent-foreground/60 mt-2">12 Hours Needed</p>
+         <p className="text-sm text-accent-foreground/60 mt-2">Start today!!</p>
       </div>
     </div>
   );
