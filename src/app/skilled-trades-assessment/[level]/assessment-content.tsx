@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Loader2, ArrowRight, RefreshCw } from 'lucide-react';
+import { ArrowRight, RefreshCw, Grip } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Progress } from '@/components/ui/progress';
 import { cn } from '@/lib/utils';
@@ -91,8 +91,17 @@ export function SkilledTradesAssessmentContent({ level }: { level: number }) {
   if (pageState === 'loading') {
     return (
       <div className="flex flex-col items-center justify-center text-center h-96">
-        <Loader2 className="w-12 h-12 animate-spin text-primary mb-4" />
-        <h2 className="text-2xl font-headline font-semibold">
+        <div className="w-72 h-40 bg-card rounded-2xl p-4 flex flex-col justify-between relative overflow-hidden animate-pulse-subtle shadow-lg">
+            <div className="flex justify-between items-start">
+                <div className="w-8 h-8 rounded-full bg-muted" />
+                <Grip className="text-muted" />
+            </div>
+            <div className="space-y-2">
+                <div className="h-4 w-3/4 bg-muted rounded-md" />
+                <div className="h-3 w-1/2 bg-muted rounded-md" />
+            </div>
+        </div>
+        <h2 className="text-2xl font-headline font-semibold mt-8">
           Generating Your Skilled Trades & Artisanship Assessment...
         </h2>
         <p className="text-muted-foreground">Level {level}: Preparing your questions.</p>
