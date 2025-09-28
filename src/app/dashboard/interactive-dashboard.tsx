@@ -1,3 +1,4 @@
+
 'use client';
 
 import React, { useState } from 'react';
@@ -19,6 +20,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { Bell, Calendar, Filter, Plus, Search } from 'lucide-react';
 import { DraggableCard } from './draggable-card';
+import { Progress } from '@/components/ui/progress';
 
 type Widget = {
   id: string;
