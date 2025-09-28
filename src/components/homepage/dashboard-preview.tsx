@@ -14,7 +14,7 @@ export function DashboardPreview() {
                 <Badge variant="outline" className="bg-primary/20 border-primary text-primary flex items-center gap-1"><Framer className="w-3 h-3"/> FRAMER</Badge>
             </div>
         </div>
-        <p className="text-xs text-accent-foreground/80">Nov 12th, 2024</p>
+        
         <div className="absolute bottom-4 left-4 right-4">
             <Progress value={24} className="h-2 bg-black/20"/>
             <p className="text-right text-xs mt-1 font-bold text-accent-foreground">24%</p>
