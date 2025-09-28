@@ -1,4 +1,5 @@
 
+'use server';
 import { ai } from '@/ai/genkit';
 import { z } from 'genkit';
 
@@ -274,9 +275,7 @@ Ensure the recommendations are diverse but still highly relevant to the user's a
 
 export const generateCareerStoryboardFlow = ai.defineFlow({
   name: 'generateCareerStoryboardFlow',
-  inputSchema: GenerateCareerStoryboardInputSchema,
-  outputSchema: GenerateCareerStoryboardOutputSchema,
-}, async (input) => {
+  inputSchema: GenerateCareerStoryboardInputSchema }, async (input) => {
   const { output } = await generateCareerStoryboardPrompt(input);
   return output!;
 });
@@ -419,3 +418,5 @@ export const evaluateLessonPlanFlow = ai.defineFlow(
     return output!;
   }
 );
+
+    
