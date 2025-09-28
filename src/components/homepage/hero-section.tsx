@@ -5,10 +5,12 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DashboardPreview } from './dashboard-preview';
 import { AnimatedStats } from './animated-stats';
+import { FloatingRockets } from './floating-rockets';
 
 export function HeroSection() {
   return (
     <section className="relative w-full py-20 md:py-32 lg:py-40 overflow-hidden">
+      <FloatingRockets />
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid md:grid-cols-2 gap-8 lg:gap-16 items-center">
           <div className="space-y-6 text-center md:text-left">
