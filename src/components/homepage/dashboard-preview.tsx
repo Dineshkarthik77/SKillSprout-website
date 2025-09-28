@@ -27,7 +27,7 @@ export function DashboardPreview() {
          <div className="absolute top-4 right-4 w-10 h-10 bg-white/30 backdrop-blur-lg rounded-full flex items-center justify-center">
             <Zap className="w-5 h-5 text-primary-foreground" />
          </div>
-         <h2 className="text-xl font-bold text-accent-foreground mt-8">Client Call</h2>
+         <h2 className="text-xl font-bold text-accent-foreground mt-8">EVERY EXPERT WAS ONCE A BEGINNER</h2>
          <p className="font-semibold text-accent-foreground/80">ABC Corp.</p>
          <p className="text-sm text-accent-foreground/60 mt-2">12 Hours Needed</p>
       </div>
