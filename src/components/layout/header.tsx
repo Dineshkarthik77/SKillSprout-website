@@ -19,6 +19,9 @@ export function Header() {
           <Button variant="ghost" asChild>
             <Link href="/domain-explorer">Domain Explorer</Link>
           </Button>
+          <Button variant="ghost" asChild>
+            <Link href="/pro-path">Pro Path</Link>
+          </Button>
           <Button asChild variant="secondary">
             <Link href="/dashboard">Dashboard</Link>
           </Button>
