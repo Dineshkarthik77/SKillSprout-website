@@ -80,7 +80,7 @@ export function FloatingRockets() {
           }}
         >
           <RocketIcon
-            className="text-primary-foreground/20"
+            className="text-blue-800/20"
             style={{
               width: rocket.size,
               height: rocket.size,
