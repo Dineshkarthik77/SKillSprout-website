@@ -131,7 +131,7 @@ export function DomainExplorerContent() {
         Select a domain to begin your tailored assessment, or go with our AI's suggestion to start your personalized journey.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {domains.map((domain) => {
           const isRecommended = domain.name === recommendation;
           return (
@@ -139,22 +139,22 @@ export function DomainExplorerContent() {
               key={domain.id}
               onClick={() => handleDomainSelect(domain)}
               className={cn(
-                'cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left',
-                isRecommended && 'ring-2 ring-primary'
+                'cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-2xl text-left bg-card/80 backdrop-blur-sm',
+                isRecommended && 'ring-2 ring-accent'
               )}
             >
               <CardHeader className="relative">
                 {isRecommended && (
-                  <Badge className="absolute top-4 right-4">
+                  <Badge className="absolute top-4 right-4 bg-accent text-accent-foreground">
                     <Bot className="mr-2 h-4 w-4" />
                     AI Suggestion
                   </Badge>
                 )}
-                <div className="p-3 bg-primary/10 rounded-full w-fit mb-2">
-                  <domain.icon className="w-8 h-8 text-primary" />
+                <div className="p-3 bg-primary/10 rounded-xl w-fit mb-2">
+                  <domain.icon className="w-6 h-6 text-primary" />
                 </div>
-                <CardTitle className="font-headline">{domain.name}</CardTitle>
-                <CardDescription>{domain.description}</CardDescription>
+                <CardTitle className="font-headline text-lg">{domain.name}</CardTitle>
+                <CardDescription className="text-xs">{domain.description}</CardDescription>
               </CardHeader>
             </Card>
           );
