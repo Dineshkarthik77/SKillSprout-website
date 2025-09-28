@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { DashboardPreview } from './dashboard-preview';
+import { AnimatedStats } from './animated-stats';
 
 export function HeroSection() {
   return (
@@ -24,6 +25,11 @@ export function HeroSection() {
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
+            </div>
+             <div className="mt-8 pt-8 border-t border-primary-foreground/20 flex flex-col sm:flex-row items-center justify-center md:justify-start gap-8">
+              <AnimatedStats finalValue={200} label="Courses Available" />
+              <AnimatedStats finalValue={50000} label="Active Learners" />
+              <AnimatedStats finalValue={95} label="Job Placement Rate" isPercentage={true} />
             </div>
           </div>
           <div className="relative w-full h-full aspect-square max-w-md mx-auto md:max-w-none">
